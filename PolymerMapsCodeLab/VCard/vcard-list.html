@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+    
+    <link rel="import" href="bower_components/polymer/polymer.html">
+    <link rel="import" href="vcard-service.html">
+    <link rel="import" href="vcard.html">
+  </head>
+  
+  <body>
+    <polymer-element name="vcard-list" noscript>
+      <template>
+
+        <vcard-service cards="{{cards}}"></vcard-service>
+
+        <div layout vertical center>
+          <template repeat="{{card in cards}}">
+            <vcard-content>
+              <firstName>{{card.firstName}}</firstName>
+              <lastName>{{card.lastName}}</lastName>
+            </vcard-content>
+          </template>
+        </div>
+
+      </template>
+    </polymer-element>
+  </body>
+</html>

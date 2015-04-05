@@ -1,0 +1,13 @@
+{
+  "name": "VCard",
+  "description": "",
+  "homepage": "",
+  "keywords": [
+  ],
+  "author": "",
+  "private": true,
+  "dependencies": {
+    "polymer": "Polymer/polymer#0.5.5",
+    "core-ajax" : "Polymer/core-ajax"
+  }
+}

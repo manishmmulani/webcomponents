@@ -1,0 +1,29 @@
+{
+  "name": "googlemap",
+  "version": "0.0.0",
+  "private": true,
+  "homepage": "https://github.com/manishmmulani/webcomponents",
+  "authors": [
+    "Manish Mulani <mulanimonty@gmail.com>"
+  ],
+  "description": "Polymer Google Map",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "map",
+    "polymer"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.5.5",
+    "google-map": "GoogleWebComponents/google-map#~0.4.2"
+  }
+}

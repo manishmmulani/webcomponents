@@ -1,0 +1,22 @@
+<script type="text/javascript" src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/google-map/google-map.html">
+<link rel="import" href="bower_components/google-map/google-map-search.html">
+
+<polymer-element name="my-element" attributes="name">
+    <template>
+        <span>Hello from <b>{{name}}</b>. This is my Shadow DOM</span>
+        <input type="text" value="{{name}}">
+    </template>
+    <script>
+        Polymer({name : "Bond Man"});
+    </script>
+</polymer-element>
+
+<my-element name="mulani"></my-element>
+
+<template>
+<google-map-search map="{{map}}" query="Fresh Living Apartments, Madhapur" result="{{result}}"></google-map-search>
+<google-map map="{{map}}"></google-map>
+<div>Result : {{result.latitude}} {{result.longitude}}</div>
+</template>

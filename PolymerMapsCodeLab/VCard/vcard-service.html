@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+    
+    <link rel="import" href="bower_components/core-ajax/core-ajax.html">
+    <link rel="import" href="vcard.html">
+  </head>
+  
+  <body>
+    <polymer-element name="vcard-service" attributes="cards">
+
+      <template>
+        <style>
+          :host {
+            display: none;
+          }
+        </style>
+        <core-ajax id="ajax"
+          auto
+          url="http://localhost:3000/users/json"
+          handleAs="json"
+          on-core-response="{{cardsLoaded}}"></core-ajax>
+      </template>
+
+      <script>
+        Polymer({
+          
+          created : function() {
+            //default data
+            this.cards = [
+              {firstName : "mmm", lastName : "mulani"}, 
+              {firstName : "mmm", lastName : "thegreat"}
+            ];
+          },
+
+          cardsLoaded : function(event, response) {
+            console.log("Response received." + JSON.stringify(this.$.ajax.response.slice(0)));
+            this.cards = response["response"];
+          }
+        });
+      </script>
+    </polymer-element>
+  </body>
+</html>
