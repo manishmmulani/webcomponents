@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Movie Review</title>
+  <link rel="import" href="header.html">
+</head>
+
+<body>
+  <header class="header">Hello World Movie</header>
+  <header class="header">scary Movie</header>
+  <header class="header">Shutter</header>
+  <description class="description">This movie is U/A rated. Horror-comedy genre and so on. Highly recommended if you
+    are a fan of sci-fi.</description>
+  <style>
+  .header {
+    color: blue;
+    font-size: 100px;
+  }
+
+  .description {
+    float: right;
+    font-style: italic;
+    font-size: 10px;
+  }
+  </style>
+  <script src="../bower_components/webcomponentsjs/HTMLImports.js"></script>
+  <script>
+  function renderHeader(headerTemplate) {
+    var headerHosts = document.querySelectorAll(".header");
+    for (var i = 0; i < headerHosts.length; i++) {
+      var headerClone = document.importNode(headerTemplate.content, true);
+      var shadow = headerHosts[i].createShadowRoot();
+      shadow.appendChild(headerClone);
+    }
+  }
+
+  window.addEventListener("HTMLImportsLoaded", function() {
+    var importLink = document.querySelector("link[rel=import]");
+    var headerTemplate = importLink.import.querySelector("#header-template");
+    renderHeader(headerTemplate);
+  });
+  </script>
+</body>
+
+</html>
