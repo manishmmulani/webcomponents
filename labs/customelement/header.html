@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Header</title>
+</head>
+
+<body>
+  <template id="headerTemplate">
+    <style>
+    .header {
+      width: 100%;
+      height: 30px;
+      font-weight: bold;
+      color: red;
+      text-align: center;
+      background: #BBB;
+      font-size: 20px;
+    }
+
+    .header:hover {
+      background: #CCC;
+    }
+    </style>
+    <header class="header">
+      <div>
+        <content select=".hi"></content>
+      </div>
+    </header>
+  </template>
+  <script src="../bower_components/webcomponentsjs/webcomponents.js"></script>
+  <script type="text/javascript">
+  "use strict";
+  (function() {
+    /*
+     * document.querySelector doesn't work when imported in the host page.
+     * current script's ownerDocument helps us to achieve this.
+     */
+    var owner = (document._currentScript || document.currentScript).ownerDocument;
+    var proto = Object.create(HTMLElement.prototype);
+
+    proto.createdCallback = function() {
+      var shadow = this.createShadowRoot();
+      var headerTemplate = owner.querySelector("#headerTemplate");
+      var headerClone = owner.importNode(headerTemplate.content, true);
+      shadow.appendChild(headerClone);
+    };
+
+    //var XHeader =
+    owner.registerElement("x-header", {
+      prototype: proto
+    });
+  })();
+  </script>
+</body>
+
+</html>
