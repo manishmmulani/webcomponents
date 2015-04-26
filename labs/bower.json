@@ -1,0 +1,24 @@
+{
+  "name": "labs",
+  "version": "0.0.0",
+  "homepage": "https://github.com/manishmmulani/webcomponents",
+  "authors": [
+    "Manish Mulani <mulanimonty@gmail.com>"
+  ],
+  "description": "experimenting with webcomponents",
+  "main": "index.html",
+  "keywords": [
+    "webcomponents"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "webcomponentsjs": "~0.6.1"
+  }
+}

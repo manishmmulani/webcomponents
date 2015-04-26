@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Celebrities</title>
+  <link rel="import" href="card.html">
+  <script type="text/javascript" src="../bower_components/webcomponentsjs/webcomponents.js"></script>
+</head>
+
+<body>
+<p>
+Below are a few Celebs of this week!
+</p>
+<script type="text/javascript">
+"use strict";
+(function() {
+  window.data = window.data || {
+    celebs: [{
+      firstName: "Shahrukh",
+      lastName: "Khan",
+      email: "yoyo@haha.com"
+    }, {
+      firstName: "Aamir",
+      lastName: "Khan"
+    }]
+  };
+
+  function processPlaceholders(templateClone, celeb) {
+    var celebKeys = Object.keys(celeb);
+    for (var i = 0; i < celebKeys.length; i++) {
+      var templateElement = templateClone.querySelector(celebKeys[i]);
+      if (templateElement) {
+        templateElement.innerHTML = celeb[celebKeys[i]];
+      }
+    }
+  }
+
+  function renderCard(celeb) {
+    var importLink = document.querySelector("link[rel=import]");
+    var template = importLink.import.getElementById("card-template");
+    var templateClone = document.importNode(template.content, true);
+
+    processPlaceholders(templateClone, celeb);
+
+    document.body.appendChild(templateClone);
+  }
+
+  /*
+   * Wait for HTMLImportsLoaded event handler to make sure template/component is loaded
+   * before using its contents
+   */
+  window.addEventListener("HTMLImportsLoaded", function() {
+    for (var i = 0; i < window.data.celebs.length; i++) {
+      renderCard(window.data.celebs[i]);
+    }
+  });
+})();
+</script>
+</body>
+</html>
