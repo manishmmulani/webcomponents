@@ -1,33 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Shadow DOM test</title>
   <script src="../../bower_components/webcomponentsjs/webcomponents.min.js"></script>
   <script src="../../bower_components/web-component-tester/browser.js"></script>
-
   <link rel="import" href="../header.html">
 </head>
+
 <body>
-  <x-header><div class="hi">Hello World Movie</div></x-header>
+  <x-header>
+    <div class="hi">Hello World Movie</div>
+  </x-header>
 
   <script type="text/javascript">
-    /*
-     * getComputedStyle, style.boxShadow
-     * shadowRoot
-     * test-fixture
-     */
-    suite("<x-header>", function() {
-      suite("style of div within div should match shadow's style", function() {
-        var style = window.getComputedStyle(document.querySelector("x-header > div"));
-        console.log(style);
-        console.log(style.boxShadow);
-        expect(style.boxShadow).to.be.ok;
-        expect(style.boxShadow).to.not.be.eql("none");
-        expect(style.fontSize).to.be.eql("20px");
-        expect(style.color).to.be.eql("rgb(255, 0, 0)");
-      });
+  /*global test:true, suite:true, expect:true*/
+  /*jslint node:true*/
+  "use strict";
+  /*
+   * getComputedStyle, style.boxShadow
+   * shadowRoot
+   * test-fixture
+   */
+  suite("<x-header>", function() {
+    suite("shadow dom", function() {
+      var style = window.getComputedStyle(document.querySelector(
+        "x-header > div"));
+      console.log(style);
+      console.log(style.boxShadow);
+
+      test("style of div within div should match shadow's style",
+        function() {
+          expect(style.boxShadow).to.be.ok;
+          //expect(style.boxShadow).to.not.be.eql("none");
+          expect(style.fontSize).to.be.eql("20px");
+          expect(style.color).to.be.eql("rgb(255, 0, 0)");
+        });
     });
+  });
   </script>
 </body>
+
 </html>
