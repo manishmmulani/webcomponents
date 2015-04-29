@@ -1,0 +1,15 @@
+Install WCT
+
+sudo npm install -g web-component-tester
+
+In your project
+
+bower install web-component-tester --save
+#This will provide browser.js and mocha/chai test tools to write suites
+
+Write tests for web-components
+Check customelement/test for example (index.html -> basic.html and shadow.html)
+
+For running tests
+Navigate to customelement and run sudo wct
+
