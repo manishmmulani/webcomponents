@@ -13,3 +13,7 @@ Check customelement/test for example (index.html -> basic.html and shadow.html)
 For running tests
 Navigate to customelement and run sudo wct
 
+Another way to run tests is
+Open URL
+http://localhost:3000/labs/customelement/test/index.html
+in different browser and evaluate.
