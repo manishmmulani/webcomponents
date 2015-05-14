@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Chooser Component</title>
+</head>
+
+<body>
+  <template id="chooserTemplate">
+    <style>
+      .border {
+        border: solid 1px #000;
+      }
+    </style>
+
+    <div>
+      <div id="multi" style="display:none"><content select="multi"></content></div>
+      <div id="data" style="display:none"><content select="data"></content></div>
+      <div class="border" id="choose"></div>
+    </div>
+  </template>
+
+  <script src="../bower_components/webcomponentsjs/webcomponents.js"></script>
+
+  <script type="text/javascript">
+  /*global console:true*/
+  "use strict";
+  (function() {
+    /*
+     * document.querySelector doesn't work when imported in the host page.
+     * current script's ownerDocument helps us to achieve this.
+     */
+    var owner = (document._currentScript || document.currentScript).ownerDocument;
+    var proto = Object.create(HTMLElement.prototype);
+
+    proto.createdCallback = function() {
+      console.log("object created.");
+      var chooserTemplate = owner.querySelector("#chooserTemplate");
+      var chooserClone = owner.importNode(chooserTemplate.content, true);
+
+      var shadow = this.createShadowRoot();
+      shadow.appendChild(chooserClone);
+
+      var multi = shadow.querySelector("content[select='multi']").getDistributedNodes()[0].innerHTML;
+      var data = shadow.querySelector("content[select='data']").getDistributedNodes()[0].innerHTML;
+      var items = data.split(",");
+      createCheckOrRadioBoxes(shadow, items, (multi == "true" ? "checkbox" : "radio"));
+    };
+
+    function createCheckOrRadioBoxes(shadow, items, checkOrRadio) {
+      var html = "";
+      for (var i = 0; i < items.length; i++) {
+        var checkBoxHTML = "<input type='" + checkOrRadio + "' value='" + items[i] + "'>" + items[i] + "</input><br>";
+        html += checkBoxHTML;
+      }
+      shadow.querySelector("#choose").innerHTML = html;
+    }
+
+    owner.registerElement("m-chooser", {
+      prototype: proto
+    });
+
+  })();
+  </script>
+</body>
+
+</html>

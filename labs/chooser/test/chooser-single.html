@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Test Suite for Chooser component with Single Select</title>
+  <script src="../../bower_components/webcomponentsjs/webcomponents.min.js"></script>
+  <script src="../../bower_components/web-component-tester/browser.js"></script>
+  <link rel="import" href="../chooser.html">
+</head>
+
+<body>
+  <m-chooser id="singleSelect-2">
+    <multi>false</multi><!-- change the content to true and see the test failing -->
+    <data>Hindi,English</data>
+  </m-chooser>
+
+  <script type="text/javascript">
+  /*global test:true, suite:true, expect:true*/
+  /*jslint node:true*/
+  "use strict";
+  /*
+   * getComputedStyle, style.boxShadow
+   * shadowRoot
+   * test-fixture
+   */
+  suite("<m-chooser>", function() {
+    suite("Choose single element from list of elements", function() {
+
+      var chooser = document.querySelector("#singleSelect-2");
+      var inputElementsFromChooser = chooser.shadowRoot.querySelectorAll("input");
+
+      test("should have 2 elements", function() {
+        expect(inputElementsFromChooser).to.have.length(2);
+      });
+
+      test("should have input elements with type radio",
+        function() {
+          for(var i = 0; i < inputElementsFromChooser.length; i++) {
+            console.log("inputElementsFromChooser[i]");
+            expect(inputElementsFromChooser[i].getAttribute("type")).to.be.eql("radio");
+          }
+        });
+    });
+  });
+  </script>
+</body>
+
+</html>

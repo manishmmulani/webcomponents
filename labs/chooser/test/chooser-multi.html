@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Test Suite for Chooser component with Multi Select</title>
+  <script src="../../bower_components/webcomponentsjs/webcomponents.min.js"></script>
+  <script src="../../bower_components/web-component-tester/browser.js"></script>
+  <link rel="import" href="../chooser.html">
+</head>
+
+<body>
+  <m-chooser id="multiSelect-5">
+    <multi>true</multi>
+    <data>Mocha,Chai,Sinon,Lodash,Async</data>
+  </m-chooser>
+
+  <script type="text/javascript">
+  /*global test:true, suite:true, expect:true*/
+  /*jslint node:true*/
+  "use strict";
+  /*
+   * getComputedStyle, style.boxShadow
+   * shadowRoot
+   * test-fixture
+   */
+  suite("<m-chooser>", function() {
+    suite("Choose multiple elements from list of elements", function() {
+
+      var chooser = document.querySelector("#multiSelect-5");
+      var inputElementsFromChooser = chooser.shadowRoot.querySelectorAll("input");
+
+      test("should have 5 input elements", function() {
+        expect(inputElementsFromChooser).to.have.length(5);
+      });
+
+      test("should have input elements with type checkbox",
+        function() {
+          for(var i = 0; i < inputElementsFromChooser.length; i++) {
+            expect(inputElementsFromChooser[i].getAttribute("type")).to.be.eql("checkbox");
+          }
+        });
+    });
+  });
+  </script>
+</body>
+
+</html>
