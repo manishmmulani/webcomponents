@@ -14,6 +14,12 @@
     <multi>true</multi>
     <data>Mocha,Chai,Sinon,Lodash,Async</data>
   </m-chooser>
+  <br />
+  <br />
+  <m-chooser id="multiSelect-3">
+    <multi>true</multi>
+    <data>Red,Green,Blue</data>
+  </m-chooser>
 
   <script type="text/javascript">
   /*global test:true, suite:true, expect:true*/
@@ -25,13 +31,13 @@
    * test-fixture
    */
   suite("<m-chooser>", function() {
-    suite("Choose multiple elements from list of elements", function() {
+    suite("Checkboxes if the number of items is <= 4", function() {
 
-      var chooser = document.querySelector("#multiSelect-5");
+      var chooser = document.querySelector("#multiSelect-3");
       var inputElementsFromChooser = chooser.shadowRoot.querySelectorAll("input");
 
-      test("should have 5 input elements", function() {
-        expect(inputElementsFromChooser).to.have.length(5);
+      test("should have 3 input elements", function() {
+        expect(inputElementsFromChooser).to.have.length(3);
       });
 
       test("should have input elements with type checkbox",
@@ -39,6 +45,23 @@
           for(var i = 0; i < inputElementsFromChooser.length; i++) {
             expect(inputElementsFromChooser[i].getAttribute("type")).to.be.eql("checkbox");
           }
+        });
+    });
+
+
+    suite("Select List if the number of items is > 4", function() {
+
+      var chooser = document.querySelector("#multiSelect-5");
+      var selectElement = chooser.shadowRoot.querySelectorAll("select");
+
+      test("Select is defined", function() {
+        expect(selectElement).to.be.ok;
+      });
+
+      test("Select should have 5 options",
+        function() {
+          var optionList = chooser.shadowRoot.querySelectorAll("select > option");
+          expect(optionList).to.have.length(5);
         });
     });
   });

@@ -45,15 +45,32 @@
       var multi = shadow.querySelector("content[select='multi']").getDistributedNodes()[0].innerHTML;
       var data = shadow.querySelector("content[select='data']").getDistributedNodes()[0].innerHTML;
       var items = data.split(",");
-      createCheckOrRadioBoxes(shadow, items, (multi == "true" ? "checkbox" : "radio"));
+
+      var threshold = 4;
+      if (items.length > 4) {
+        createSelectList(shadow, items, (multi == "true"));
+      }
+      else {
+        createCheckOrRadioBoxes(shadow, items, (multi == "true" ? "checkbox" : "radio"));
+      }
     };
 
     function createCheckOrRadioBoxes(shadow, items, checkOrRadio) {
       var html = "";
       for (var i = 0; i < items.length; i++) {
-        var checkBoxHTML = "<input type='" + checkOrRadio + "' value='" + items[i] + "'>" + items[i] + "</input><br>";
+        var checkBoxHTML = "<input name='group' type='" + checkOrRadio + "' value='" + items[i] + "'>" + items[i] + "</input><br>";
         html += checkBoxHTML;
       }
+      shadow.querySelector("#choose").innerHTML = html;
+    }
+
+    function createSelectList(shadow, items, multiple) {
+      var html = "<select " + (multiple ? "multiple" : "") + ">";
+      for (var i = 0; i < items.length; i++) {
+        var optionHTML = "<option value='" + items[i] + "'>" + items[i] + "</option>";
+        html += optionHTML;
+      }
+      html += "</select>";
       shadow.querySelector("#choose").innerHTML = html;
     }
 
